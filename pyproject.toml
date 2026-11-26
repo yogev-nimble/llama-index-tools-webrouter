@@ -1,0 +1,70 @@
+[build-system]
+requires = ["hatchling>=1.26,<2"]
+build-backend = "hatchling.build"
+
+[project]
+name = "llama-index-tools-webrouter"
+version = "0.1.0"
+description = "LlamaIndex tool spec for WebRouter: keyless web search and page extraction, routed across providers."
+readme = "README.md"
+requires-python = ">=3.11,<4.0"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+authors = [
+  { name = "Nimble" },
+]
+maintainers = [{ name = "yogev-nimble" }]
+keywords = ["llama-index", "llamaindex", "webrouter", "tools", "web-search", "extract", "agents"]
+classifiers = [
+  "Intended Audience :: Developers",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3 :: Only",
+  "Topic :: Internet :: WWW/HTTP :: Indexing/Search",
+]
+dependencies = [
+  "webrouter>=0.16.0,<1",
+  "llama-index-core>=0.13.0,<0.15",
+]
+
+[project.optional-dependencies]
+test = [
+  "mypy>=1.10",
+  "pytest>=8.3",
+  "pytest-cov>=6.1",
+  "ruff>=0.8,<1",
+]
+
+[project.urls]
+Homepage = "https://docs.webrouter.net"
+Documentation = "https://github.com/yogev-nimble/llama-index-tools-webrouter#readme"
+Repository = "https://github.com/yogev-nimble/llama-index-tools-webrouter"
+Issues = "https://github.com/yogev-nimble/llama-index-tools-webrouter/issues"
+
+[tool.hatch.build.targets.wheel]
+include = ["llama_index/"]
+
+[tool.hatch.build.targets.sdist]
+include = ["/llama_index", "/tests", "/LICENSE", "/README.md", "/CHANGELOG.md", "/pyproject.toml"]
+
+[tool.llamahub]
+contains_example = false
+import_path = "llama_index.tools.webrouter"
+
+[tool.llamahub.class_authors]
+WebRouterToolSpec = "yogev-nimble"
+
+[tool.mypy]
+disallow_untyped_defs = true
+explicit_package_bases = true
+ignore_missing_imports = true
+namespace_packages = true
+
+[tool.pytest.ini_options]
+addopts = "-ra"
+testpaths = ["tests"]
+
+[tool.ruff]
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I", "UP", "B"]
